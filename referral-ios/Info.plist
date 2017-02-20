@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Vets</key>
+	<array>
+		<string>DierenDokters Amsterdam</string>
+		<string>Caressa Amsterdam</string>
+		<string>Dierenkliniek De Jordaan</string>
+		<string>Dierenkliniek Westerpark</string>
+		<string>Dierenkliniek Centrum-Oost Amsterdam</string>
+		<string>Dierenkliniek de Wetering</string>
+		<string>Dierenartspraktijk Centrum en West Amsterdam</string>
+		<string>Dierenkliniek Vondelpark</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

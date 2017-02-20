@@ -95,13 +95,13 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcX-8s-LsD">
-                                <rect key="frame" x="16" y="536" width="89" height="44"/>
+                                <rect key="frame" x="21" y="589" width="89" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Wis"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tw-Jf-btQ">
-                                <rect key="frame" x="251" y="536" width="103" height="44"/>
+                                <rect key="frame" x="256" y="589" width="103" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.20620681992860876" green="0.65497356650000005" blue="0.0021033051911829317" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Verzenden"/>
