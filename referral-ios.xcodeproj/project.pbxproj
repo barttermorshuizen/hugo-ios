@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC3CC7731E5B2B3B007DAA8F /* VetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CC7721E5B2B3B007DAA8F /* VetController.swift */; };
+		CC3CC7751E5B30A9007DAA8F /* Referral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CC7741E5B30A9007DAA8F /* Referral.swift */; };
 		CCC3EAD21E5B0AF1009EBFC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3EAD11E5B0AF1009EBFC3 /* AppDelegate.swift */; };
 		CCC3EAD41E5B0AF1009EBFC3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3EAD31E5B0AF1009EBFC3 /* ViewController.swift */; };
 		CCC3EAD71E5B0AF1009EBFC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCC3EAD51E5B0AF1009EBFC3 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC3CC7721E5B2B3B007DAA8F /* VetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VetController.swift; sourceTree = "<group>"; };
+		CC3CC7741E5B30A9007DAA8F /* Referral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Referral.swift; sourceTree = "<group>"; };
 		CCC3EACE1E5B0AF1009EBFC3 /* referral-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "referral-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC3EAD11E5B0AF1009EBFC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCC3EAD31E5B0AF1009EBFC3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				CCC3EAD81E5B0AF1009EBFC3 /* Assets.xcassets */,
 				CCC3EADA1E5B0AF1009EBFC3 /* LaunchScreen.storyboard */,
 				CCC3EADD1E5B0AF1009EBFC3 /* Info.plist */,
+				CC3CC7721E5B2B3B007DAA8F /* VetController.swift */,
+				CC3CC7741E5B30A9007DAA8F /* Referral.swift */,
 			);
 			path = "referral-ios";
 			sourceTree = "<group>";
@@ -136,8 +142,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC3CC7751E5B30A9007DAA8F /* Referral.swift in Sources */,
 				CCC3EAD41E5B0AF1009EBFC3 /* ViewController.swift in Sources */,
 				CCC3EAD21E5B0AF1009EBFC3 /* AppDelegate.swift in Sources */,
+				CC3CC7731E5B2B3B007DAA8F /* VetController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +305,7 @@
 				CCC3EAE21E5B0AF1009EBFC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

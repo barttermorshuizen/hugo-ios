@@ -21,8 +21,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var pickerData: [String] = [String]()
     
+    var referral: Referral!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        referral = Referral();
+        
         // Do any additional setup after loading the view, typically from a nib.
         // Input data into the Array:
         pickerData = ["E-Mail", "Telefonisch"]
@@ -35,9 +40,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         btnClear.addTarget(self, action: #selector(clearClick), for: UIControlEvents.touchDown)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControlEvents.touchDown)
         
+        modelToView()
     
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewToModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        referral = Referral();
+        modelToView();
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,5 +89,45 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     }
     
+    func modelToView(){
+        // copies the model in the view
+        mVet.setTitle(referral.getVetPractice(), for: UIControlState.normal)
+        mReferralReason.text = referral.getReason();
+        // todo patient
+        var patientName : String
+        if (referral.getPatientName() != nil){
+            patientName = referral.getPatientName()!
+        }
+        else {
+            patientName = ""
+        }
+        if (referral.getPatientType() != nil && !(referral.getPatientType()!.isEmpty)) {
+            patientName = patientName + " (" + referral.getPatientType()! + ")"
+        }
+        
+        mPatient.setTitle(patientName, for: UIControlState.normal)
+        
+        mOwner.setTitle(referral.getOwnerName(), for: UIControlState.normal)
+        // todo spinner value
+        if (referral.getContactByEmail() != nil && referral.getContactByEmail()!){
+            contactPicker.selectRow(0, inComponent: 0, animated: true)
+        }
+        else {
+            contactPicker.selectRow(1, inComponent: 0, animated: true)
+        }
+        
+    }
+    
+    func viewToModel(){
+    // only pushes the reason and contact preference to the model. It is assumed that the other activities sync to the model when they close
+    referral.setReason(reason: mReferralReason.text)
+        if (contactPicker.selectedRow(inComponent:0)==0){
+            referral.setContactByEmail(contactByEmail: true)
+        }
+        else {
+            referral.setContactByEmail(contactByEmail: false)
+        }
+        referral.store()
+    }
 }
 
