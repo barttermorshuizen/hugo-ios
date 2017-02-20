@@ -10,7 +10,15 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    
     @IBOutlet weak var contactPicker: UIPickerView!
+    @IBOutlet weak var mVet: UIButton!
+    @IBOutlet weak var mReferralReason: UITextView!
+    @IBOutlet weak var mPatient: UIButton!
+    @IBOutlet weak var btnSend: UIButton!
+    @IBOutlet weak var btnClear: UIButton!
+    @IBOutlet weak var mOwner: UIButton!
+    
     var pickerData: [String] = [String]()
     
     override func viewDidLoad() {
@@ -20,6 +28,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         pickerData = ["E-Mail", "Telefonisch"]
         self.contactPicker.delegate = self
         self.contactPicker.dataSource = self
+        
+        mVet.addTarget(self, action: #selector(vetClick), for: UIControlEvents.touchDown)
+        mPatient.addTarget(self, action: #selector(patientClick), for: UIControlEvents.touchDown)
+        mOwner.addTarget(self, action: #selector(ownerClick), for: UIControlEvents.touchDown)
+        btnClear.addTarget(self, action: #selector(clearClick), for: UIControlEvents.touchDown)
+        btnSend.addTarget(self, action: #selector(sendClick), for: UIControlEvents.touchDown)
+        
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,5 +56,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
+    
+    func vetClick(textField: UITextField) {
+        
+    }
+    func patientClick(textField: UITextField) {
+        
+    }
+    func ownerClick(textField: UITextField) {
+    }
+    func clearClick(textField: UITextField) {
+    
+    }
+    func sendClick(textField: UITextField) {
+    
+    }
+    
 }
 
