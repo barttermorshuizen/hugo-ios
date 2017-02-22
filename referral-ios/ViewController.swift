@@ -7,20 +7,21 @@
 //
 
 import UIKit
+import MessageUI
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailComposeViewControllerDelegate {
 
     
-    @IBOutlet weak var contactPicker: UIPickerView!
     @IBOutlet weak var mVet: UIButton!
     @IBOutlet weak var mReferralReason: UITextView!
     @IBOutlet weak var mPatient: UIButton!
     @IBOutlet weak var btnSend: UIButton!
     @IBOutlet weak var btnClear: UIButton!
     @IBOutlet weak var mOwner: UIButton!
+    @IBOutlet weak var btnEmail: UIButton!
+    @IBOutlet weak var btnTel: UIButton!
     
-    var pickerData: [String] = [String]()
-    
+    var radioButtonController: SSRadioButtonsController?
     var referral: Referral!
     
     override func viewDidLoad() {
@@ -28,11 +29,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         referral = Referral();
         
-        // Do any additional setup after loading the view, typically from a nib.
-        // Input data into the Array:
-        pickerData = ["E-Mail", "Telefonisch"]
-        self.contactPicker.delegate = self
-        self.contactPicker.dataSource = self
+        radioButtonController = SSRadioButtonsController(buttons: btnEmail, btnTel)
+        radioButtonController!.delegate = self
+
+       
         
         mVet.addTarget(self, action: #selector(vetClick), for: UIControlEvents.touchDown)
         mPatient.addTarget(self, action: #selector(patientClick), for: UIControlEvents.touchDown)
@@ -60,18 +60,34 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Dispose of any resources that can be recreated.
     }
 
-    // The number of columns of data
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
+        super.touchesBegan(touches, with: event)
     }
     
-    // The number of rows of data
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+
+    func didSelectButton(_ aButton: UIButton?) {
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+    private func callNumber(phoneNumber:String) {
+        if let phoneCallURL:NSURL = NSURL(string:"tel://\(phoneNumber)") {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL as URL)) {
+                application.open(phoneCallURL as URL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    @IBAction func phoneClick(_ sender: UIBarButtonItem) {
+        let busPhone = "31204081408"
+        callNumber(phoneNumber: busPhone)
     }
     
     func vetClick(textField: UITextField) {
@@ -83,51 +99,96 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func ownerClick(textField: UITextField) {
     }
     func clearClick(textField: UITextField) {
+        clear()
     
     }
-    func sendClick(textField: UITextField) {
     
+    func mail() {
+        viewToModel()
+    
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["bart@moreawesome.co"])
+            if (referral!.mOwnerEmail != nil && !(referral!.mOwnerEmail!.isEmpty)){
+                mail.setCcRecipients([referral!.mOwnerEmail!])
+            }
+            mail.setSubject("Verwijzing")
+            mail.setMessageBody(referral!.toMessage(), isHTML: false)
+            present(mail, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Waarschuwing", message: "E-mail kan niet worden verstuurd", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Sluit", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
+    func sendClick(textField: UITextField) {
+        mail()
+    }
+    
+    func setButtonTitle(_ modelValue : String?, for button : UIButton){
+        let emptyTitle : String = "Tap om te veranderen..."
+        if (modelValue == nil || (modelValue != nil && modelValue!.isEmpty)){
+            button.setTitle(emptyTitle, for: UIControlState.normal)
+        }
+        else {
+           button.setTitle(modelValue!, for: UIControlState.normal)
+        }
     }
     
     func modelToView(){
         // copies the model in the view
-        mVet.setTitle(referral.getVetPractice(), for: UIControlState.normal)
+    
+        // vet
+        setButtonTitle(referral.getVetPractice(), for: mVet)
+        
+        
+        // reason
         mReferralReason.text = referral.getReason();
-        // todo patient
-        var patientName : String
-        if (referral.getPatientName() != nil){
-            patientName = referral.getPatientName()!
+        
+        // patient
+        setButtonTitle(referral.getPatientName(), for: mPatient)
+        
+        // owner
+        setButtonTitle(referral.getOwnerName(), for: mOwner)
+        
+        // contact
+        if (referral.getContactByEmail()!){
+            radioButtonController!.pressed(btnEmail)
         }
         else {
-            patientName = ""
-        }
-        if (referral.getPatientType() != nil && !(referral.getPatientType()!.isEmpty)) {
-            patientName = patientName + " (" + referral.getPatientType()! + ")"
-        }
-        
-        mPatient.setTitle(patientName, for: UIControlState.normal)
-        
-        mOwner.setTitle(referral.getOwnerName(), for: UIControlState.normal)
-        // todo spinner value
-        if (referral.getContactByEmail() != nil && referral.getContactByEmail()!){
-            contactPicker.selectRow(0, inComponent: 0, animated: true)
-        }
-        else {
-            contactPicker.selectRow(1, inComponent: 0, animated: true)
+            radioButtonController!.pressed(btnTel)
         }
         
     }
     
     func viewToModel(){
-    // only pushes the reason and contact preference to the model. It is assumed that the other activities sync to the model when they close
-    referral.setReason(reason: mReferralReason.text)
-        if (contactPicker.selectedRow(inComponent:0)==0){
-            referral.setContactByEmail(contactByEmail: true)
-        }
-        else {
+        // only pushes the reason and contact preference to the model. It is assumed that the other activities sync to the model when they close
+        referral.setReason(reason: mReferralReason.text)
+        // todo button value
+        
+       
+        let currentButton = radioButtonController!.selectedButton()
+        if (currentButton != nil && currentButton == btnTel) {
             referral.setContactByEmail(contactByEmail: false)
         }
+        else {
+            referral.setContactByEmail(contactByEmail: true)
+        }
+
         referral.store()
+    }
+    
+    func clear(){
+        referral.clear()
+        referral.store();
+        modelToView();
     }
 }
 

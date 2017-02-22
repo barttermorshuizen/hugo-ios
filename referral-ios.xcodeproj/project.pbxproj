@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC3BC5D71E5DA6CD00730FD0 /* OwnerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BC5D61E5DA6CD00730FD0 /* OwnerController.swift */; };
+		CC3BC5DB1E5DC01E00730FD0 /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BC5DA1E5DC01E00730FD0 /* PetController.swift */; };
 		CC3CC7731E5B2B3B007DAA8F /* VetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CC7721E5B2B3B007DAA8F /* VetController.swift */; };
 		CC3CC7751E5B30A9007DAA8F /* Referral.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3CC7741E5B30A9007DAA8F /* Referral.swift */; };
+		CC5A6F5B1E5D96890020DCB9 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5A6F591E5D96890020DCB9 /* SSRadioButtonsController.swift */; };
+		CC5A6F5C1E5D96890020DCB9 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5A6F5A1E5D96890020DCB9 /* SSRadioButton.swift */; };
 		CCC3EAD21E5B0AF1009EBFC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3EAD11E5B0AF1009EBFC3 /* AppDelegate.swift */; };
 		CCC3EAD41E5B0AF1009EBFC3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3EAD31E5B0AF1009EBFC3 /* ViewController.swift */; };
 		CCC3EAD71E5B0AF1009EBFC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCC3EAD51E5B0AF1009EBFC3 /* Main.storyboard */; };
@@ -17,8 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC3BC5D61E5DA6CD00730FD0 /* OwnerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerController.swift; sourceTree = "<group>"; };
+		CC3BC5DA1E5DC01E00730FD0 /* PetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetController.swift; sourceTree = "<group>"; };
 		CC3CC7721E5B2B3B007DAA8F /* VetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VetController.swift; sourceTree = "<group>"; };
 		CC3CC7741E5B30A9007DAA8F /* Referral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Referral.swift; sourceTree = "<group>"; };
+		CC5A6F591E5D96890020DCB9 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSRadioButtonsController.swift; path = ../SSRadioButtonsController.swift; sourceTree = "<group>"; };
+		CC5A6F5A1E5D96890020DCB9 /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSRadioButton.swift; path = ../SSRadioButton.swift; sourceTree = "<group>"; };
 		CCC3EACE1E5B0AF1009EBFC3 /* referral-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "referral-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC3EAD11E5B0AF1009EBFC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCC3EAD31E5B0AF1009EBFC3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +47,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC5A6F541E5D92AB0020DCB9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CCC3EAD81E5B0AF1009EBFC3 /* Assets.xcassets */,
+				CCC3EADD1E5B0AF1009EBFC3 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CC5A6F5D1E5D96990020DCB9 /* SSRRadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				CC5A6F591E5D96890020DCB9 /* SSRadioButtonsController.swift */,
+				CC5A6F5A1E5D96890020DCB9 /* SSRadioButton.swift */,
+			);
+			name = SSRRadioButton;
+			sourceTree = "<group>";
+		};
 		CCC3EAC51E5B0AF1009EBFC3 = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +84,16 @@
 		CCC3EAD01E5B0AF1009EBFC3 /* referral-ios */ = {
 			isa = PBXGroup;
 			children = (
-				CCC3EAD11E5B0AF1009EBFC3 /* AppDelegate.swift */,
-				CCC3EAD31E5B0AF1009EBFC3 /* ViewController.swift */,
-				CCC3EAD51E5B0AF1009EBFC3 /* Main.storyboard */,
-				CCC3EAD81E5B0AF1009EBFC3 /* Assets.xcassets */,
+				CC5A6F5D1E5D96990020DCB9 /* SSRRadioButton */,
+				CC5A6F541E5D92AB0020DCB9 /* Resources */,
 				CCC3EADA1E5B0AF1009EBFC3 /* LaunchScreen.storyboard */,
-				CCC3EADD1E5B0AF1009EBFC3 /* Info.plist */,
-				CC3CC7721E5B2B3B007DAA8F /* VetController.swift */,
+				CCC3EAD51E5B0AF1009EBFC3 /* Main.storyboard */,
+				CCC3EAD11E5B0AF1009EBFC3 /* AppDelegate.swift */,
 				CC3CC7741E5B30A9007DAA8F /* Referral.swift */,
+				CCC3EAD31E5B0AF1009EBFC3 /* ViewController.swift */,
+				CC3CC7721E5B2B3B007DAA8F /* VetController.swift */,
+				CC3BC5D61E5DA6CD00730FD0 /* OwnerController.swift */,
+				CC3BC5DA1E5DC01E00730FD0 /* PetController.swift */,
 			);
 			path = "referral-ios";
 			sourceTree = "<group>";
@@ -143,9 +171,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC3CC7751E5B30A9007DAA8F /* Referral.swift in Sources */,
+				CC5A6F5B1E5D96890020DCB9 /* SSRadioButtonsController.swift in Sources */,
 				CCC3EAD41E5B0AF1009EBFC3 /* ViewController.swift in Sources */,
+				CC3BC5DB1E5DC01E00730FD0 /* PetController.swift in Sources */,
 				CCC3EAD21E5B0AF1009EBFC3 /* AppDelegate.swift in Sources */,
 				CC3CC7731E5B2B3B007DAA8F /* VetController.swift in Sources */,
+				CC3BC5D71E5DA6CD00730FD0 /* OwnerController.swift in Sources */,
+				CC5A6F5C1E5D96890020DCB9 /* SSRadioButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +207,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -224,6 +257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

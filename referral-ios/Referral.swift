@@ -190,8 +190,82 @@ class Referral {
     }
     
     func toMessage() -> String {
-        //TODO
-        return "TDOO"
+        /*
+         Beste Hugo,
+         Hierbij verwijs ik door
+         <naam patient>, een <type dier - ras> van geslacht <gender>
+         
+         Het gaat om het volgende: <reason>
+         
+         Kun je contact opnemen met de eigenaar - naam eigenaar - via email/tel.
+         Email: <owner email>.
+         Telefoonnummer: <owner tel>.
+         
+         Vriendelijke groet,
+         
+         <naam>
+         */
+        var lines = [String]()
+        
+        lines.append("Beste Hugo, \n")
+        lines.append("Hierbij verwijs ik door:")
+        
+        if (mPatientName != nil && !(mPatientName!.isEmpty)){
+            lines.append("  - patient: \(mPatientName!)")
+        }
+        if (mPatientType != nil && !(mPatientType!.isEmpty)){
+            lines.append("  - soort: \(mPatientType!)")
+        }
+        if (mPatienRace != nil && !(mPatienRace!.isEmpty)){
+            lines.append("  - ras: \(mPatienRace!)")
+        }
+        if (mPatientGender != nil && !(mPatientGender!.isEmpty)){
+            lines.append("  - geslacht: \(mPatientGender!)")
+        }
+        lines.append("")
+        
+        if (mReason != nil && !(mReason!.isEmpty)){
+            lines.append("Het gaat om het volgende: \(mPatientGender!)")
+        }
+        lines.append("")
+        
+        var contact : String
+        if (mContactByEmail != nil && mContactByEmail!){
+            contact = "email?";
+        }
+        else {
+            contact = "de telefoon?";
+        }
+        lines.append("Kun je contact opnemen met de eigenaar via \(contact)")
+        
+        if (mOwnerName != nil && !(mOwnerName!.isEmpty)) {
+             lines.append("  - naam: \(mOwnerName!)")
+        }
+       
+        if (mOwnerEmail != nil && !(mOwnerEmail!.isEmpty)){
+            lines.append("  - email: \(mOwnerEmail!)")
+        }
+        if (mOwnerTel != nil && !(mOwnerTel!.isEmpty)){
+            lines.append("  - tel: \(mOwnerTel!)")
+        }
+       
+        
+        lines.append("")
+        lines.append("Vriendelijke groet,")
+        lines.append("")
+        
+        if (mName != nil && !(mName!.isEmpty)){
+            lines.append("\(mName!)")
+        }
+        if (mVetPractice != nil && !(mVetPractice!.isEmpty)){
+            lines.append("\(mVetPractice!)")
+        }
+        
+        var result : String = ""
+        for item in lines {
+            result = result + "\(item)\n"
+        }
+        return result;
     }
 }
 

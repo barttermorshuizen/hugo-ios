@@ -21,16 +21,16 @@ class VetController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Dierenarts";
+        self.navigationItem.title = "Dierenarts"
         
-        referral = Referral();
+        referral = Referral()
         
         pickerData = ["DierenDokters Amsterdam", "Caressa Amsterdam", "Dierenkliniek De Jordaan", "Dierenkliniek Westerpark","Dierenkliniek Centrum-Oost Amsterdam","Dierenkliniek de Wetering","Dierenartspraktijk Centrum en West Amsterdam","Dierenkliniek Vondelpark"]
         
         self.mSpinnerVets.delegate = self
         self.mSpinnerVets.dataSource = self
 
-        modelToView();
+        modelToView()
         
     }
     
