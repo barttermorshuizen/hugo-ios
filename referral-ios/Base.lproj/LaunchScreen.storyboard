@@ -20,12 +20,26 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-splash" translatesAutoresizingMaskIntoConstraints="NO" id="2zH-S0-9hd">
+                                <rect key="frame" x="20" y="20" width="335" height="627"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="2zH-S0-9hd" secondAttribute="bottom" constant="20" id="59d-88-YEh"/>
+                            <constraint firstItem="2zH-S0-9hd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="BJx-EP-7kq"/>
+                            <constraint firstItem="2zH-S0-9hd" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="L59-66-CUm"/>
+                            <constraint firstAttribute="trailing" secondItem="2zH-S0-9hd" secondAttribute="trailing" constant="20" id="ZFU-ll-J4T"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="50.399999999999999" y="372.86356821589209"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch-splash" width="2694" height="1283"/>
+    </resources>
 </document>
