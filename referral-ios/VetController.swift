@@ -8,10 +8,11 @@
 
 import UIKit
 
-class VetController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class VetController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var mEditTextName: UITextField!
-    @IBOutlet weak var mSpinnerVets: UIPickerView!
+    @IBOutlet weak var mEditTextVetPractice: UITextField!
+    @IBOutlet weak var mEditTextVetPlace: UITextField!
     
     var referral : Referral?
     
@@ -25,11 +26,6 @@ class VetController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         referral = Referral()
         
-        pickerData = ["DierenDokters Amsterdam", "Caressa Amsterdam", "Dierenkliniek De Jordaan", "Dierenkliniek Westerpark","Dierenkliniek Centrum-Oost Amsterdam","Dierenkliniek de Wetering","Dierenartspraktijk Centrum en West Amsterdam","Dierenkliniek Vondelpark"]
-        
-        self.mSpinnerVets.delegate = self
-        self.mSpinnerVets.dataSource = self
-
         modelToView()
         
     }
@@ -45,38 +41,31 @@ class VetController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         modelToView();
     }
     
-    // The number of columns of data
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
     }
     
-    // The number of rows of data
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
-    }
-
     func modelToView(){
         // copies the model in the view
-        mEditTextName.text = referral!.getName();
-        
-        if (referral!.getVetPractice() != nil){
-            let pos : Int? = pickerData.index(of: referral!.getVetPractice()!)
-            if (pos != nil){
-                mSpinnerVets.selectRow(pos!, inComponent: 0, animated: false)
-            }
-        }
-        
+        mEditTextName.text = referral!.getName()
+        mEditTextVetPractice.text = referral!.getVetPractice()
+        mEditTextVetPlace.text = referral!.getVetPlace()
     }
     
     func viewToModel() {
-        // only pushes the vet and name preferences to the model.
+        // store the vet, place and name preferences to the model.
         referral!.setName(name: mEditTextName.text)
-        let pos:Int = mSpinnerVets.selectedRow(inComponent: 0);
-        referral!.setVetPractice(vetPractice: pickerView(mSpinnerVets, titleForRow: pos, forComponent: 0))
+        referral!.setVetPractice(vetPractice: mEditTextVetPractice.text)
+        referral?.setVetPlace(vetPlace: mEditTextVetPlace.text)
         referral!.store();
     }
 }

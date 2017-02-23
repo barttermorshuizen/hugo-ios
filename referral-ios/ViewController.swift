@@ -40,6 +40,13 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         btnClear.addTarget(self, action: #selector(clearClick), for: UIControlEvents.touchDown)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControlEvents.touchDown)
         
+        self.navigationController!.navigationBar.barTintColor = UIColor(red: 0, green: 174/255, blue: 239/255, alpha: 1.0)
+        self.navigationController!.navigationBar.tintColor = UIColor.white
+        self.navigationController!.navigationBar.isTranslucent = false
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        
         modelToView()
     
     }
@@ -91,19 +98,37 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
     }
     
     func vetClick(textField: UITextField) {
-        
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
     }
     func patientClick(textField: UITextField) {
-        
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
     }
     func ownerClick(textField: UITextField) {
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
     }
     func clearClick(textField: UITextField) {
         clear()
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
     
     }
     
     func mail() {
+        //close keybard if reason was first responder
+        if (mReferralReason.isFirstResponder){
+            mReferralReason.resignFirstResponder()
+        }
         viewToModel()
     
         

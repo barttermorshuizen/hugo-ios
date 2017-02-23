@@ -12,6 +12,7 @@ class Referral {
     
     var mName : String? // name of the referrer
     var mVetPractice : String? // name of the practice
+    var mVetPlace : String? // place of the practice
     var mPatientName : String? // name of the patient
     var mPatientType : String? // type of patient (e.g. Dog, Cat)
     var mPatienRace : String? // race of the patient (e.g. Irish Setter)
@@ -19,7 +20,7 @@ class Referral {
     var mPatientGender : String? // Gender of patient
     var mOwnerName : String? // name of the owner
     var mOwnerTel : String? // telephone number of the owner
-    var mOwnerEmail : String?// email pof the owner
+    var mOwnerEmail : String?// email of the owner
     var mReason : String?
     var mContactByEmail : Bool?
     
@@ -37,6 +38,14 @@ class Referral {
     
     func setVetPractice(vetPractice: String?) {
         mVetPractice = vetPractice
+    }
+    
+    func getVetPlace() -> String?  {
+        return mVetPlace
+    }
+    
+    func setVetPlace(vetPlace: String?) {
+        mVetPlace = vetPlace
     }
     
     func getPatientName() -> String? {
@@ -123,6 +132,7 @@ class Referral {
         let defaults = UserDefaults.standard
         mName = defaults.string(forKey: "mName")
         mVetPractice = defaults.string(forKey: "mVetPractice")
+        mVetPlace = defaults.string(forKey: "mVetPlace")
         mPatientName = defaults.string(forKey: "mPatientName")
         mPatientType = defaults.string(forKey: "mPatientType")
         mPatienRace = defaults.string(forKey: "mPatienRace")
@@ -140,6 +150,7 @@ class Referral {
         let defaults = UserDefaults.standard
         defaults.setValue(mName, forKey: "mName")
         defaults.setValue(mVetPractice, forKey: "mVetPractice")
+        defaults.setValue(mVetPlace, forKey: "mVetPlace")
         defaults.setValue(mPatientName, forKey: "mPatientName")
         defaults.setValue(mPatientType, forKey: "mPatientType")
         defaults.setValue(mPatienRace, forKey: "mPatienRace")
@@ -259,6 +270,9 @@ class Referral {
         }
         if (mVetPractice != nil && !(mVetPractice!.isEmpty)){
             lines.append("\(mVetPractice!)")
+        }
+        if (mVetPlace != nil && !(mVetPlace!.isEmpty)){
+            lines.append("\(mVetPlace!)")
         }
         
         var result : String = ""
