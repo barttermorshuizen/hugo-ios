@@ -19,6 +19,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
     @IBOutlet weak var mRadioButtonGenderV: SSRadioButton!
     @IBOutlet weak var mRadioButtonGenderVG: SSRadioButton!
     @IBOutlet weak var mRadioButtonGenderO: SSRadioButton!
+    @IBOutlet weak var lblPatientType: UILabel!
     
     var referral : Referral?
     var radioButtonController: SSRadioButtonsController?
@@ -76,6 +77,26 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
         }
     }
     
+    @IBAction func patientTypeChanged(_ sender: Any) {
+        colorLabelsWhenEmpty()
+    }
+    
+    func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
+        if (editText.text!.isEmpty){
+            // set label text to accent color
+            label.textColor = UIColor.init(red: 241/255, green: 90/255, blue: 49/255, alpha: 1)
+        }
+        else {
+            // set label in gray color
+            label.textColor = UIColor.darkGray
+        }
+    }
+    
+    func colorLabelsWhenEmpty(){
+        colorLabelWhenEmpty(lblPatientType,mEditTextPatientType);
+    }
+
+    
     func modelToView(){
         // copies the model in the view
         mEditTextPetName.text = referral!.getPatientName()
@@ -100,6 +121,8 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
             default: break
             }
         }
+        
+        colorLabelsWhenEmpty()
     }
     
     func viewToModel() {

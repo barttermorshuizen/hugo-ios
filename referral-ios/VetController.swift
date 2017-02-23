@@ -13,6 +13,7 @@ class VetController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mEditTextName: UITextField!
     @IBOutlet weak var mEditTextVetPractice: UITextField!
     @IBOutlet weak var mEditTextVetPlace: UITextField!
+    @IBOutlet weak var lblVetPractice: UILabel!
     
     var referral : Referral?
     
@@ -54,11 +55,33 @@ class VetController: UIViewController, UITextFieldDelegate {
         return false
     }
     
+    
+    @IBAction func practiceChanged(_ sender: Any) {
+        colorLabelsWhenEmpty();
+    }
+    
+    func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
+        if (editText.text!.isEmpty){
+            // set label text to accent color
+            label.textColor = UIColor.init(red: 241/255, green: 90/255, blue: 49/255, alpha: 1)
+        }
+        else {
+            // set label in gray color
+            label.textColor = UIColor.darkGray
+        }
+    }
+    
+    
+    func colorLabelsWhenEmpty(){
+        colorLabelWhenEmpty(lblVetPractice,mEditTextVetPractice);
+    }
+    
     func modelToView(){
         // copies the model in the view
         mEditTextName.text = referral!.getName()
         mEditTextVetPractice.text = referral!.getVetPractice()
         mEditTextVetPlace.text = referral!.getVetPlace()
+        colorLabelsWhenEmpty()
     }
     
     func viewToModel() {
