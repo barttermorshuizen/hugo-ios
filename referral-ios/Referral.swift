@@ -180,10 +180,16 @@ class Referral {
         mPatientGender=""
     }
     
-    func  clearOwner(){
+    func clearOwner(){
         mOwnerName=""
         mOwnerTel=""
         mOwnerEmail=""
+    }
+    
+    func clearVet(){
+        mVetPlace=""
+        mVetPractice=""
+        mName=""
     }
     
     func validateComplete() -> String {

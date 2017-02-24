@@ -76,6 +76,19 @@ class VetController: UIViewController, UITextFieldDelegate {
         colorLabelWhenEmpty(lblVetPractice,mEditTextVetPractice);
     }
     
+    
+    @IBAction func phoneClicked(_ sender: Any) {
+        let busPhone = "0204081408"
+        Call.callNumber(phoneNumber: busPhone)
+    }
+    
+    @IBAction func clearClicked(_ sender: Any) {
+        referral!.clearVet()
+        referral!.store();
+        modelToView();
+    }
+    
+    
     func modelToView(){
         // copies the model in the view
         mEditTextName.text = referral!.getName()

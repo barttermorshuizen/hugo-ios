@@ -16,7 +16,6 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
     @IBOutlet weak var mReferralReason: UITextView!
     @IBOutlet weak var mPatient: UIButton!
     @IBOutlet weak var btnSend: UIButton!
-    @IBOutlet weak var btnClear: UIButton!
     @IBOutlet weak var mOwner: UIButton!
     @IBOutlet weak var btnEmail: UIButton!
     @IBOutlet weak var btnTel: UIButton!
@@ -44,7 +43,6 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         mVet.addTarget(self, action: #selector(vetClick), for: UIControlEvents.touchDown)
         mPatient.addTarget(self, action: #selector(patientClick), for: UIControlEvents.touchDown)
         mOwner.addTarget(self, action: #selector(ownerClick), for: UIControlEvents.touchDown)
-        btnClear.addTarget(self, action: #selector(clearClick), for: UIControlEvents.touchDown)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControlEvents.touchDown)
         
         setBorder(mVet)
@@ -99,18 +97,10 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         }
     }
     
-    private func callNumber(phoneNumber:String) {
-        if let phoneCallURL:NSURL = NSURL(string:"tel://\(phoneNumber)") {
-            let application:UIApplication = UIApplication.shared
-            if (application.canOpenURL(phoneCallURL as URL)) {
-                application.open(phoneCallURL as URL, options: [:], completionHandler: nil)
-            }
-        }
-    }
-    
+
     @IBAction func phoneClick(_ sender: UIBarButtonItem) {
-        let busPhone = "31204081408"
-        callNumber(phoneNumber: busPhone)
+        let busPhone = "0204081408"
+        Call.callNumber(phoneNumber: busPhone)
     }
     
     func vetClick(textField: UITextField) {
@@ -131,13 +121,26 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
             mReferralReason.resignFirstResponder()
         }
     }
-    func clearClick(textField: UITextField) {
-        clear()
-        //close keybard if reason was first responder
-        if (mReferralReason.isFirstResponder){
-            mReferralReason.resignFirstResponder()
-        }
     
+    
+    @IBAction func clearClick(_ sender: Any) {
+        
+        let refreshAlert = UIAlertController(title: "Wissen", message: "Het gehele verwijsformulier wordt gewist. Weet je het zeker?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ja", style: .default, handler: { (action: UIAlertAction!) in
+            self.clear()
+            //close keybard if reason was first responder
+            if (self.mReferralReason.isFirstResponder){
+                self.mReferralReason.resignFirstResponder()
+            }
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Nee", style: .cancel, handler: { (action: UIAlertAction!) in
+            // no action
+        }))
+        
+        present(refreshAlert, animated: true, completion: nil)
+        
     }
     
     func mail() {

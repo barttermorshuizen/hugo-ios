@@ -88,6 +88,16 @@ class OwnerController : UIViewController, UITextFieldDelegate {
         }
     }
 
+    @IBAction func phoneClicked(_ sender: Any) {
+        let busPhone = "0204081408"
+        Call.callNumber(phoneNumber: busPhone)
+    }
+    
+    @IBAction func clearClicked(_ sender: Any) {
+        referral!.clearOwner()
+        referral!.store();
+        modelToView();
+    }
     
     func modelToView(){
         // copies the model in the view

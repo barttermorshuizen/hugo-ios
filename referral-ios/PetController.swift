@@ -97,6 +97,17 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
     }
 
     
+    @IBAction func phoneClicked(_ sender: Any) {
+        let busPhone = "0204081408"
+        Call.callNumber(phoneNumber: busPhone)
+    }
+    
+    @IBAction func clearClicked(_ sender: Any) {
+        referral!.clearPatient()
+        referral!.store();
+        modelToView();
+    }
+    
     func modelToView(){
         // copies the model in the view
         mEditTextPetName.text = referral!.getPatientName()
