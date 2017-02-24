@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailComposeViewControllerDelegate {
+class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailComposeViewControllerDelegate, UITextViewDelegate {
 
     
     @IBOutlet weak var mVet: UIButton!
@@ -20,9 +20,16 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
     @IBOutlet weak var mOwner: UIButton!
     @IBOutlet weak var btnEmail: UIButton!
     @IBOutlet weak var btnTel: UIButton!
+    @IBOutlet weak var lblVet: UILabel!
+    @IBOutlet weak var lblReason: UILabel!
+    @IBOutlet weak var lblPatient: UILabel!
+    @IBOutlet weak var lblOwner: UILabel!
     
     var radioButtonController: SSRadioButtonsController?
     var referral: Referral!
+    
+    let accentedColor : UIColor = UIColor.init(red: 241/255, green: 90/255, blue: 49/255, alpha: 1)
+    let normalColor : UIColor = UIColor.darkGray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +46,11 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         mOwner.addTarget(self, action: #selector(ownerClick), for: UIControlEvents.touchDown)
         btnClear.addTarget(self, action: #selector(clearClick), for: UIControlEvents.touchDown)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControlEvents.touchDown)
+        
+        setBorder(mVet)
+        setBorder(mReferralReason)
+        setBorder(mPatient)
+        setBorder(mOwner)
         
         self.navigationController!.navigationBar.barTintColor = UIColor(red: 0, green: 174/255, blue: 239/255, alpha: 1.0)
         self.navigationController!.navigationBar.tintColor = UIColor.white
@@ -76,6 +88,10 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
     }
     
 
+    func textViewDidChange(_ textView: UITextView) {
+        colorLabelsWhenEmpty()
+    }
+    
     func didSelectButton(_ aButton: UIButton?) {
         //close keybard if reason was first responder
         if (mReferralReason.isFirstResponder){
@@ -157,8 +173,8 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         mail()
     }
     
-    func setButtonTitle(_ modelValue : String?, for button : UIButton){
-        let emptyTitle : String = "Tap om te veranderen..."
+    func setButtonTitle(_ modelValue : String?, for button : UIButton, empty emptyTitle : String){
+        
         if (modelValue == nil || (modelValue != nil && modelValue!.isEmpty)){
             button.setTitle(emptyTitle, for: UIControlState.normal)
         }
@@ -167,21 +183,81 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         }
     }
     
+    
+    func colorVetLabelWhenEmpty(){
+        
+        let vetEmpty : Bool = (referral!.getVetPractice()!.isEmpty)
+
+        if (vetEmpty){
+            lblVet.textColor = accentedColor
+        }
+        else {
+            lblVet.textColor = normalColor
+        }
+    }
+    
+    func colorReasonLabelWhenEmpty(){
+        let text : String = mReferralReason.text
+        if (text.isEmpty){
+            lblReason.textColor = accentedColor
+        }
+        else {
+            lblReason.textColor = normalColor
+        }
+    }
+    func colorPatientLabelWhenEmpty(){
+        if (referral!.getPatientType() == nil || referral!.getPatientType()!.isEmpty){
+            lblPatient.textColor = accentedColor
+        }
+        else {
+            lblPatient.textColor = normalColor
+        }
+    }
+    
+    func colorOwnerLabelWhenEmpty(){
+        
+        let ownerEmailEmpty : Bool = (referral!.getOwnerEmail()!.isEmpty)
+        let ownerTelEmpty : Bool = (referral!.getOwnerTel()!.isEmpty)
+        let ownerNameEmpty :Bool = (referral!.getOwnerName()!.isEmpty)
+        
+        
+        if ((ownerEmailEmpty && ownerTelEmpty)||ownerNameEmpty){
+            lblOwner.textColor = accentedColor
+        }
+        else {
+            lblOwner.textColor = normalColor
+        }
+    }
+
+    func colorLabelsWhenEmpty(){
+        colorVetLabelWhenEmpty();
+        colorReasonLabelWhenEmpty();
+        colorPatientLabelWhenEmpty();
+        colorOwnerLabelWhenEmpty();
+    }
+
+    func setBorder(_ view:UIView){
+        view.layer.cornerRadius = 5
+        view.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        view.layer.borderWidth = 0.5
+        view.clipsToBounds = true
+    }
+    
     func modelToView(){
         // copies the model in the view
     
         // vet
-        setButtonTitle(referral.getVetPractice(), for: mVet)
+        setButtonTitle(referral.getVetPractice(), for: mVet, empty: "Dierenarts...")
         
         
         // reason
         mReferralReason.text = referral.getReason();
         
         // patient
-        setButtonTitle(referral.getPatientName(), for: mPatient)
+        setButtonTitle(referral.getPatientType(), for: mPatient, empty: "Patient...")
         
         // owner
-        setButtonTitle(referral.getOwnerName(), for: mOwner)
+        setButtonTitle(referral.getOwnerName(), for: mOwner, empty: "Eigenaar...")
         
         // contact
         if (referral.getContactByEmail()!){
@@ -191,6 +267,7 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
             radioButtonController!.pressed(btnTel)
         }
         
+        colorLabelsWhenEmpty()
     }
     
     func viewToModel(){

@@ -166,16 +166,24 @@ class Referral {
     }
     
     func clear(){
+        clearPatient()
+        clearOwner()
+        mReason=""
+        mContactByEmail=true
+    }
+    
+    func clearPatient(){
         mPatientName=""
         mPatientType=""
         mPatienRace=""
         mPatientDoB=""
         mPatientGender=""
+    }
+    
+    func  clearOwner(){
         mOwnerName=""
         mOwnerTel=""
         mOwnerEmail=""
-        mReason=""
-        mContactByEmail=true
     }
     
     func validateComplete() -> String {
