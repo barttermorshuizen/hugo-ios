@@ -195,20 +195,29 @@ class Referral {
     func validateComplete() -> String {
     // vet data
     if (mVetPractice != nil && mVetPractice!.isEmpty){
-        return "De praktijk is niet ingevuld"
+        return "Dierenarts - praktijk is niet ingevuld"
     }
+        
+    // reason is empty
+    if (mReason != nil && mReason!.isEmpty){
+        return "Reden verwijzing is niet ingevuld"
+    }
+        
     // patient data
     if (mPatientType != nil && mPatientType!.isEmpty){
-        return "Diersoort is niet ingevuld"
+        return "Patient - diersoort is niet ingevuld"
     }
-    //  owner has either mail or tel number
+        
+    // Owner has a name
+    if (mOwnerName != nil && mOwnerName!.isEmpty){
+        return "Eigenaar - de naam van de eigenaar is niet ingevuld"
+    }
+
+        //  owner has either mail or tel number
     if (mOwnerEmail != nil && mOwnerEmail!.isEmpty && mOwnerTel!.isEmpty){
-        return "Eigenaar heeft geen contactinformatie"
+        return "Eigenaar  - contactinformatie ontbreekt"
     }
-    // reason is empty
-        if (mReason != nil && mReason!.isEmpty){
-            return "Reden verwijzing is niet ingevuld"
-        }
+    
     
     // if we got here, all is cool
     return "Ok";

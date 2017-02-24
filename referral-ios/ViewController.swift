@@ -149,24 +149,38 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
             mReferralReason.resignFirstResponder()
         }
         viewToModel()
-    
-        
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients(["bart@moreawesome.co"])
-            if (referral!.mOwnerEmail != nil && !(referral!.mOwnerEmail!.isEmpty)){
-                mail.setCcRecipients([referral!.mOwnerEmail!])
+        // check before mail
+        let msg : String = referral.validateComplete()
+        if (msg == "Ok") {
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+                mail.setToRecipients(["bart@moreawesome.co"])
+                if (referral!.mOwnerEmail != nil && !(referral!.mOwnerEmail!.isEmpty)){
+                    mail.setCcRecipients([referral!.mOwnerEmail!])
+                }
+                mail.setSubject("Verwijzing")
+                mail.setMessageBody(referral!.toMessage(), isHTML: false)
+                present(mail, animated: true)
+            } else {
+                let alert = UIAlertController(title: "Waarschuwing", message: "E-mail kan niet worden verstuurd", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Sluit", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
-            mail.setSubject("Verwijzing")
-            mail.setMessageBody(referral!.toMessage(), isHTML: false)
-            present(mail, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Waarschuwing", message: "E-mail kan niet worden verstuurd", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Sluit", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            // validation is not ok
+            let validationAlert = UIAlertController(title: "Validatie", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+            
+            validationAlert.addAction(UIAlertAction(title: "Sluiten", style: .cancel, handler: { (action: UIAlertAction!) in
+            }))
+            
+            present(validationAlert, animated: true, completion: nil)            
+            
         }
     }
+    
+    
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
