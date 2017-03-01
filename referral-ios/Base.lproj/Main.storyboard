@@ -148,7 +148,7 @@
                                     <action selector="clearClick:" destination="BYZ-38-t0r" id="zUo-7a-ygz"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="phone" style="plain" id="DAB-vI-89h">
+                            <barButtonItem image="phone" id="DAB-vI-89h">
                                 <connections>
                                     <action selector="phoneClick:" destination="BYZ-38-t0r" id="gP9-ZR-ADm"/>
                                 </connections>
@@ -248,7 +248,7 @@
                                     <action selector="clearClicked:" destination="Uey-Nd-6Pi" id="b4r-KH-9Ie"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="phone" style="plain" id="7AF-th-10t">
+                            <barButtonItem image="phone" id="7AF-th-10t">
                                 <connections>
                                     <action selector="phoneClicked:" destination="Uey-Nd-6Pi" id="7d5-RH-uCQ"/>
                                 </connections>
@@ -344,7 +344,7 @@
                                     <action selector="clearClicked:" destination="0MP-Y2-Ej2" id="bnS-3s-6NV"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="phone" style="plain" id="C4t-iF-gWv">
+                            <barButtonItem image="phone" id="C4t-iF-gWv">
                                 <connections>
                                     <action selector="phoneClicked:" destination="0MP-Y2-Ej2" id="N9c-Q1-vOe"/>
                                 </connections>
@@ -527,7 +527,7 @@
                                     <action selector="clearClicked:" destination="vsJ-as-wil" id="Oc1-pq-xaP"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="phone" style="plain" id="4z8-rZ-kYA">
+                            <barButtonItem image="phone" id="4z8-rZ-kYA">
                                 <connections>
                                     <action selector="phoneClicked:" destination="vsJ-as-wil" id="Ufb-ox-dvq"/>
                                 </connections>
@@ -554,7 +554,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LO0-ST-NFk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="AvK-BV-BZw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AvK-BV-BZw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EZw-7N-rQ1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

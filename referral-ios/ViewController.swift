@@ -203,7 +203,7 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
     
     func colorVetLabelWhenEmpty(){
         
-        let vetEmpty : Bool = (referral!.getVetPractice()!.isEmpty)
+        let vetEmpty : Bool = (referral!.getVetPractice() == nil || referral!.getVetPractice()!.isEmpty)
 
         if (vetEmpty){
             lblVet.textColor = accentedColor
@@ -222,6 +222,7 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
             lblReason.textColor = normalColor
         }
     }
+    
     func colorPatientLabelWhenEmpty(){
         if (referral!.getPatientType() == nil || referral!.getPatientType()!.isEmpty){
             lblPatient.textColor = accentedColor
@@ -233,9 +234,9 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
     
     func colorOwnerLabelWhenEmpty(){
         
-        let ownerEmailEmpty : Bool = (referral!.getOwnerEmail()!.isEmpty)
-        let ownerTelEmpty : Bool = (referral!.getOwnerTel()!.isEmpty)
-        let ownerNameEmpty :Bool = (referral!.getOwnerName()!.isEmpty)
+        let ownerEmailEmpty : Bool = (referral!.getOwnerEmail() == nil || referral!.getOwnerEmail()!.isEmpty)
+        let ownerTelEmpty : Bool = (referral!.getOwnerTel() == nil || referral!.getOwnerTel()!.isEmpty)
+        let ownerNameEmpty :Bool = (referral!.getOwnerName() == nil || referral!.getOwnerName()!.isEmpty)
         
         
         if ((ownerEmailEmpty && ownerTelEmpty)||ownerNameEmpty){
@@ -277,7 +278,7 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         setButtonTitle(referral.getOwnerName(), for: mOwner, empty: "Eigenaar...")
         
         // contact
-        if (referral.getContactByEmail()!){
+        if (referral.getContactByEmail()){
             radioButtonController!.pressed(btnEmail)
         }
         else {

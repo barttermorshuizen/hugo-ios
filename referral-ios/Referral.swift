@@ -22,7 +22,7 @@ class Referral {
     var mOwnerTel : String? // telephone number of the owner
     var mOwnerEmail : String?// email of the owner
     var mReason : String?
-    var mContactByEmail : Bool?
+    var mContactByEmail : Bool
     
     func getName() -> String? {
         return mName
@@ -120,12 +120,12 @@ class Referral {
         mReason = reason
     }
     
-    func getContactByEmail() -> Bool? {
+    func getContactByEmail() -> Bool {
         return mContactByEmail
     }
     
-    func setContactByEmail(contactByEmail : Bool?) {
-    mContactByEmail = contactByEmail
+    func setContactByEmail(contactByEmail : Bool) {
+        mContactByEmail = contactByEmail
     }
     
     init() {
@@ -142,7 +142,13 @@ class Referral {
         mOwnerTel = defaults.string(forKey: "mOwnerTel")
         mOwnerEmail = defaults.string(forKey: "mOwnerEmail")
         mReason = defaults.string(forKey: "mReason")
-        mContactByEmail = defaults.bool(forKey: "mContactByEmail")
+        let contactByEmail = defaults.object(forKey: "mContactByEmail")
+        if (contactByEmail != nil) {
+            mContactByEmail = contactByEmail as! Bool
+        }
+        else {
+            mContactByEmail = true // defaults to true
+        }
     }
     
     func store(){
@@ -264,7 +270,7 @@ class Referral {
         lines.append("")
         
         var contact : String
-        if (mContactByEmail != nil && mContactByEmail!){
+        if (mContactByEmail){
             contact = "email?";
         }
         else {
