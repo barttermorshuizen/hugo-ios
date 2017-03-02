@@ -159,15 +159,36 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
                 if (referral!.mOwnerEmail != nil && !(referral!.mOwnerEmail!.isEmpty)){
                     mail.setCcRecipients([referral!.mOwnerEmail!])
                 }
-                mail.setSubject("Verwijzing")
+                mail.setSubject("Verwijzing ten behoeve van " + referral!.getOwnerName()!);
                 mail.setMessageBody(referral!.toMessage(), isHTML: false)
+                
+                // Create a destination URL.
+                var attachmentContents:String=""
+                let fileName = "5678909878"
+                
+                
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: referral.toJson(), options: .prettyPrinted)
+                    // here "jsonData" is the dictionary encoded in JSON data
+                    attachmentContents =  String(data: jsonData, encoding: String.Encoding.utf8)!
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+                let url = stringToFile(attachmentContents,toFile: fileName);
+        
+                if let fileData = NSData (contentsOf: url)
+                    
+                    {
+                        mail.addAttachmentData(fileData as Data, mimeType: "application/prs.hugo", fileName:fileName + ".hugo")
+                    }
                 present(mail, animated: true)
             } else {
                 let alert = UIAlertController(title: "Waarschuwing", message: "E-mail kan niet worden verstuurd", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Sluit", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-        }
+       }
         else {
             // validation is not ok
             let validationAlert = UIAlertController(title: "Validatie", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -180,8 +201,21 @@ class ViewController: UIViewController, SSRadioButtonControllerDelegate, MFMailC
         }
     }
     
-    
-    
+func stringToFile(_ string:String, toFile fileName:String) -> URL {
+    // stores the given string in the fileName.hugo path in the temporary directory
+    let fileExtension="hugo"
+    let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)
+    let targetURL = tempDirectoryURL.appendingPathComponent("\(fileName).\(fileExtension)")
+    //writing
+    do {
+        try string.write(to: targetURL, atomically: false, encoding: String.Encoding.utf8)
+    }
+    catch {
+        
+    }
+    return targetURL
+}
+
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }

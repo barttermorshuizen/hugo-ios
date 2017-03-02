@@ -151,6 +151,59 @@ class Referral {
         }
     }
     
+    init?(json: [String: Any]) {
+        guard
+            let name = json["name"] as? String,
+            let vetpractice = json["vetpractice"] as? String,
+            let vetplace = json["vetplace"] as? String,
+            let patientname = json["patientname"] as? String,
+            let patienttype = json["patienttype"] as? String,
+            let patientrace = json["patientrace"] as? String,
+            let patientdob = json["patientdob"] as? String,
+            let patientgender = json["patientgender"] as? String,
+            let ownername = json["ownername"] as? String,
+            let ownertel = json["ownertel"] as? String,
+            let owneremail = json["owneremail"] as? String,
+            let reason = json["reason"] as? String,
+            let contactbyemail = json["contactbyemail"] as? Bool
+        else {
+            return nil
+        }
+        
+        mName = name
+        mVetPractice = vetpractice
+        mVetPlace = vetplace
+        mPatientName = patientname
+        mPatientType = patienttype
+        mPatienRace = patientrace
+        mPatientDoB = patientdob
+        mPatientGender = patientgender
+        mOwnerName = ownername
+        mOwnerTel = ownertel
+        mOwnerEmail = owneremail
+        mReason = reason
+        mContactByEmail = contactbyemail
+        
+    }
+    
+    func toJson() -> NSDictionary {
+        let json:NSMutableDictionary = NSMutableDictionary()
+        json.setValue(mName, forKey: "name")
+        json.setValue(mVetPractice, forKey: "vetpractice")
+        json.setValue(mVetPlace, forKey: "vetplace")
+        json.setValue(mPatientName, forKey: "patientname")
+        json.setValue(mPatientType, forKey: "patienttype")
+        json.setValue(mPatienRace, forKey: "patientrace")
+        json.setValue(mPatientDoB, forKey: "patientdob")
+        json.setValue(mPatientGender, forKey: "patientgender")
+        json.setValue(mOwnerName, forKey: "ownername")
+        json.setValue(mOwnerTel, forKey: "ownertel")
+        json.setValue(mOwnerEmail, forKey: "owneremail")
+        json.setValue(mReason, forKey: "reason")
+        json.setValue(mContactByEmail, forKey: "contactbyemail")
+        return json
+    }
+    
     func store(){
     
         let defaults = UserDefaults.standard
