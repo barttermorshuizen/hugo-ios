@@ -14,10 +14,10 @@ class OwnerController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mEditTextOwnerName: UITextField!
     @IBOutlet weak var mEditTextOwnerEmail: UITextField!
     @IBOutlet weak var mEditTextOwnerTel: UITextField!
-    
     @IBOutlet weak var lblOwnerName: UILabel!
     @IBOutlet weak var lblOwnerEmail: UILabel!
     @IBOutlet weak var lblOwnerTel: UILabel!
+    @IBOutlet weak var btnOk: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +97,10 @@ class OwnerController : UIViewController, UITextFieldDelegate {
         referral!.clearOwner()
         referral!.store();
         modelToView();
+    }
+    
+    @IBAction func okClicked(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func modelToView(){

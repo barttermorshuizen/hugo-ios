@@ -13,6 +13,7 @@ class Referral {
     var mName : String? // name of the referrer
     var mVetPractice : String? // name of the practice
     var mVetPlace : String? // place of the practice
+    var mVetEmail : String? // email address of bvet
     var mPatientName : String? // name of the patient
     var mPatientType : String? // type of patient (e.g. Dog, Cat)
     var mPatienRace : String? // race of the patient (e.g. Irish Setter)
@@ -46,6 +47,15 @@ class Referral {
     
     func setVetPlace(vetPlace: String?) {
         mVetPlace = vetPlace
+    }
+    
+    
+    func getVetEmail() -> String?  {
+        return mVetEmail
+    }
+    
+    func setVetEmail(vetEmail: String?) {
+        mVetEmail = vetEmail
     }
     
     func getPatientName() -> String? {
@@ -133,6 +143,7 @@ class Referral {
         mName = defaults.string(forKey: "mName")
         mVetPractice = defaults.string(forKey: "mVetPractice")
         mVetPlace = defaults.string(forKey: "mVetPlace")
+        mVetEmail = defaults.string(forKey: "mVetEmail")
         mPatientName = defaults.string(forKey: "mPatientName")
         mPatientType = defaults.string(forKey: "mPatientType")
         mPatienRace = defaults.string(forKey: "mPatienRace")
@@ -156,6 +167,7 @@ class Referral {
             let name = json["name"] as? String,
             let vetpractice = json["vetpractice"] as? String,
             let vetplace = json["vetplace"] as? String,
+            let vetemail = json["vetemail"] as? String,
             let patientname = json["patientname"] as? String,
             let patienttype = json["patienttype"] as? String,
             let patientrace = json["patientrace"] as? String,
@@ -173,6 +185,7 @@ class Referral {
         mName = name
         mVetPractice = vetpractice
         mVetPlace = vetplace
+        mVetEmail = vetemail
         mPatientName = patientname
         mPatientType = patienttype
         mPatienRace = patientrace
@@ -191,6 +204,7 @@ class Referral {
         json.setValue(mName, forKey: "name")
         json.setValue(mVetPractice, forKey: "vetpractice")
         json.setValue(mVetPlace, forKey: "vetplace")
+        json.setValue(mVetEmail, forKey: "vetemail")
         json.setValue(mPatientName, forKey: "patientname")
         json.setValue(mPatientType, forKey: "patienttype")
         json.setValue(mPatienRace, forKey: "patientrace")
@@ -210,6 +224,7 @@ class Referral {
         defaults.setValue(mName, forKey: "mName")
         defaults.setValue(mVetPractice, forKey: "mVetPractice")
         defaults.setValue(mVetPlace, forKey: "mVetPlace")
+        defaults.setValue(mVetEmail, forKey: "mVetEmail")
         defaults.setValue(mPatientName, forKey: "mPatientName")
         defaults.setValue(mPatientType, forKey: "mPatientType")
         defaults.setValue(mPatienRace, forKey: "mPatienRace")
@@ -247,6 +262,7 @@ class Referral {
     
     func clearVet(){
         mVetPlace=""
+        mVetEmail=""
         mVetPractice=""
         mName=""
     }
@@ -255,6 +271,10 @@ class Referral {
     // vet data
     if (mVetPractice != nil && mVetPractice!.isEmpty){
         return "Dierenarts - praktijk is niet ingevuld"
+    }
+        
+    if (mVetEmail != nil && mVetEmail!.isEmpty){
+        return "Dierenarts - email adres is niet ingevuld"
     }
         
     // reason is empty
@@ -300,27 +320,45 @@ class Referral {
          */
         var lines = [String]()
         
+        lines.append("<p>")
         lines.append("Beste Hugo, \n")
-        lines.append("Hierbij verwijs ik door:")
+        lines.append("</p>")
         
+        lines.append("<br>")
+        
+        lines.append("<p>")
+        lines.append("Hierbij verwijs ik door:")
+        lines.append("</p>")
+        
+        lines.append("<ul>")
         if (mPatientName != nil && !(mPatientName!.isEmpty)){
-            lines.append("  - patient: \(mPatientName!)")
+            lines.append("<li>")
+            lines.append("patient: \(mPatientName!)")
+            lines.append("</li>")
         }
         if (mPatientType != nil && !(mPatientType!.isEmpty)){
-            lines.append("  - soort: \(mPatientType!)")
+            lines.append("<li>")
+            lines.append("soort: \(mPatientType!)")
+            lines.append("</li>")
         }
         if (mPatienRace != nil && !(mPatienRace!.isEmpty)){
-            lines.append("  - ras: \(mPatienRace!)")
+            lines.append("<li>")
+            lines.append("ras: \(mPatienRace!)")
+            lines.append("</li>")
         }
         if (mPatientGender != nil && !(mPatientGender!.isEmpty)){
-            lines.append("  - geslacht: \(mPatientGender!)")
+            lines.append("<li>")
+            lines.append("geslacht: \(mPatientGender!)")
+            lines.append("</li>")
         }
-        lines.append("")
+        
+        lines.append("</ul>")
         
         if (mReason != nil && !(mReason!.isEmpty)){
-            lines.append("Het gaat om het volgende: \(mPatientGender!)")
+            lines.append("<p>")
+            lines.append("Het gaat om het volgende: \(mReason!)")
+            lines.append("</p>")
         }
-        lines.append("")
         
         var contact : String
         if (mContactByEmail){
@@ -329,33 +367,50 @@ class Referral {
         else {
             contact = "de telefoon?";
         }
+        lines.append("<p>")
         lines.append("Kun je contact opnemen met de eigenaar via \(contact)")
-        
+        lines.append("</p>")
+        lines.append("<ul>")
         if (mOwnerName != nil && !(mOwnerName!.isEmpty)) {
-             lines.append("  - naam: \(mOwnerName!)")
+            lines.append("<li>")
+             lines.append("naam: \(mOwnerName!)")
+             lines.append("</li>")
         }
        
         if (mOwnerEmail != nil && !(mOwnerEmail!.isEmpty)){
-            lines.append("  - email: \(mOwnerEmail!)")
+             lines.append("<li>")
+            lines.append("email: \(mOwnerEmail!)")
+             lines.append("</li>")
         }
         if (mOwnerTel != nil && !(mOwnerTel!.isEmpty)){
-            lines.append("  - tel: \(mOwnerTel!)")
+             lines.append("<li>")
+            lines.append("tel: \(mOwnerTel!)")
+             lines.append("</li>")
         }
-       
+        lines.append("</ul>")
         
-        lines.append("")
+        
+        lines.append("<p>")
         lines.append("Vriendelijke groet,")
-        lines.append("")
+        
         
         if (mName != nil && !(mName!.isEmpty)){
             lines.append("\(mName!)")
+            lines.append("<br>")
+        }
+        if (mVetEmail != nil && !(mVetEmail!.isEmpty)){
+            lines.append("\(mVetEmail!)")
+            lines.append("<br>")
         }
         if (mVetPractice != nil && !(mVetPractice!.isEmpty)){
             lines.append("\(mVetPractice!)")
+            lines.append("<br>")
         }
         if (mVetPlace != nil && !(mVetPlace!.isEmpty)){
             lines.append("\(mVetPlace!)")
+            lines.append("<br>")
         }
+        lines.append("</p>")
         
         var result : String = ""
         for item in lines {

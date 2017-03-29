@@ -40,7 +40,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        do {
+            let data = try Data(contentsOf: url)
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            if (json != nil){
+                let referral = Referral(json: json!)
+                referral!.store()
+            }
+            return true
+        }
+        catch  {
+            // error handling
+            print(error)
+            return false
+        }
+    }
 }
 

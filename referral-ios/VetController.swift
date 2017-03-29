@@ -13,7 +13,10 @@ class VetController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mEditTextName: UITextField!
     @IBOutlet weak var mEditTextVetPractice: UITextField!
     @IBOutlet weak var mEditTextVetPlace: UITextField!
+    @IBOutlet weak var mEditTextVetEmail: UITextField!
     @IBOutlet weak var lblVetPractice: UILabel!
+    @IBOutlet weak var lblVetEmail: UILabel!
+    @IBOutlet weak var btnOk: UIButton!
     
     var referral : Referral?
     
@@ -74,6 +77,7 @@ class VetController: UIViewController, UITextFieldDelegate {
     
     func colorLabelsWhenEmpty(){
         colorLabelWhenEmpty(lblVetPractice,mEditTextVetPractice);
+        colorLabelWhenEmpty(lblVetEmail,mEditTextVetEmail);
     }
     
     
@@ -88,12 +92,16 @@ class VetController: UIViewController, UITextFieldDelegate {
         modelToView();
     }
     
+    @IBAction func okClicked(_ sender: Any) {
+            _ = self.navigationController?.popViewController(animated: true)
+    }
     
     func modelToView(){
         // copies the model in the view
         mEditTextName.text = referral!.getName()
         mEditTextVetPractice.text = referral!.getVetPractice()
         mEditTextVetPlace.text = referral!.getVetPlace()
+        mEditTextVetEmail.text = referral!.getVetEmail()
         colorLabelsWhenEmpty()
     }
     
@@ -101,7 +109,8 @@ class VetController: UIViewController, UITextFieldDelegate {
         // store the vet, place and name preferences to the model.
         referral!.setName(name: mEditTextName.text)
         referral!.setVetPractice(vetPractice: mEditTextVetPractice.text)
-        referral?.setVetPlace(vetPlace: mEditTextVetPlace.text)
+        referral!.setVetPlace(vetPlace: mEditTextVetPlace.text)
+        referral!.setVetEmail(vetEmail: mEditTextVetEmail.text)
         referral!.store();
     }
 }

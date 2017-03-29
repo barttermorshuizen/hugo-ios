@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>mailgun_client_domain</key>
+	<string>sandbox51f2b7ec903e468eb8fd59e7471c68ac.mailgun.org</string>
+	<key>mailgun_api_key</key>
+	<string>key-56c023d43b741996ecf84bc554a9d050</string>
+	<key>email_hugo</key>
+	<string>bart@moreawesome.co</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

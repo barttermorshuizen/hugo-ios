@@ -20,6 +20,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
     @IBOutlet weak var mRadioButtonGenderVG: SSRadioButton!
     @IBOutlet weak var mRadioButtonGenderO: SSRadioButton!
     @IBOutlet weak var lblPatientType: UILabel!
+    @IBOutlet weak var btnOk: UIButton!
     
     var referral : Referral?
     var radioButtonController: SSRadioButtonsController?
@@ -106,6 +107,11 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
         referral!.clearPatient()
         referral!.store();
         modelToView();
+    }
+    
+    
+    @IBAction func okClicked(_ sender: Any) {
+            _ = self.navigationController?.popViewController(animated: true)
     }
     
     func modelToView(){
