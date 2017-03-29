@@ -244,6 +244,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="continue"/>
                                 <connections>
+                                    <action selector="emailChanged:" destination="Uey-Nd-6Pi" eventType="editingChanged" id="FLG-ra-A9j"/>
                                     <outlet property="delegate" destination="Uey-Nd-6Pi" id="w45-2p-oEm"/>
                                 </connections>
                             </textField>

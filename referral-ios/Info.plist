@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>mailgun_client_domain</key>
-	<string>sandbox51f2b7ec903e468eb8fd59e7471c68ac.mailgun.org</string>
-	<key>mailgun_api_key</key>
-	<string>key-56c023d43b741996ecf84bc554a9d050</string>
-	<key>email_hugo</key>
-	<string>bart@moreawesome.co</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -23,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2</string>
+	<string>0.3</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -44,5 +38,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>email_hugo</key>
+	<string>bart@moreawesome.co</string>
+	<key>mailgun_api_key</key>
+	<string>key-56c023d43b741996ecf84bc554a9d050</string>
+	<key>mailgun_client_domain</key>
+	<string>sandbox51f2b7ec903e468eb8fd59e7471c68ac.mailgun.org</string>
 </dict>
 </plist>

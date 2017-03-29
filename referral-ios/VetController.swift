@@ -60,8 +60,13 @@ class VetController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func practiceChanged(_ sender: Any) {
-        colorLabelsWhenEmpty();
+        colorLabelsWhenEmpty()
     }
+    
+    @IBAction func emailChanged(_ sender: Any) {
+        colorLabelsWhenEmpty()
+    }
+    
     
     func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
         if (editText.text!.isEmpty){

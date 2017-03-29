@@ -392,6 +392,8 @@ class Referral {
         
         lines.append("<p>")
         lines.append("Vriendelijke groet,")
+        lines.append("<br>")
+    
         
         
         if (mName != nil && !(mName!.isEmpty)){
