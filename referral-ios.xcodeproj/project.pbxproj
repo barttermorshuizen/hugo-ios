@@ -32,7 +32,7 @@
 		CC31354B1E8BC03100972B51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "referral-ios/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		CC31FE861E8B92E8005086E1 /* TransferController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferController.swift; sourceTree = "<group>"; };
 		CC31FE881E8B9D82005086E1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		CC31FE8C1E8BAFA4005086E1 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		CC31FE8C1E8BAFA4005086E1 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CC3BC5D61E5DA6CD00730FD0 /* OwnerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerController.swift; sourceTree = "<group>"; };
 		CC3BC5DA1E5DC01E00730FD0 /* PetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetController.swift; sourceTree = "<group>"; };
 		CC3CC7721E5B2B3B007DAA8F /* VetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VetController.swift; sourceTree = "<group>"; };
