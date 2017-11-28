@@ -23,7 +23,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
     @IBOutlet weak var btnOk: UIButton!
     
     var referral : Referral?
-    var radioButtonController: SSRadioButtonsController?
+    @objc var radioButtonController: SSRadioButtonsController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +82,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
         colorLabelsWhenEmpty()
     }
     
-    func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
+    @objc func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
         if (editText.text!.isEmpty){
             // set label text to accent color
             label.textColor = UIColor.init(red: 241/255, green: 90/255, blue: 49/255, alpha: 1)
@@ -93,7 +93,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
         }
     }
     
-    func colorLabelsWhenEmpty(){
+    @objc func colorLabelsWhenEmpty(){
         colorLabelWhenEmpty(lblPatientType,mEditTextPatientType);
     }
 
@@ -114,7 +114,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
             _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func modelToView(){
+    @objc func modelToView(){
         // copies the model in the view
         mEditTextPetName.text = referral!.getPatientName()
         mEditTextPatientType.text = referral!.getPatientType()
@@ -142,7 +142,7 @@ class PetController : UIViewController, UITextFieldDelegate, SSRadioButtonContro
         colorLabelsWhenEmpty()
     }
     
-    func viewToModel() {
+    @objc func viewToModel() {
         referral!.setPatientName(patientName: mEditTextPetName.text)
         referral!.setPatientType(patientType: mEditTextPatientType.text)
         referral!.setPatienRace(patienRace: mEditTextPatientRace.text)

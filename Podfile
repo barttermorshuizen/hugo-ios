@@ -7,5 +7,7 @@ target 'referral-ios' do
 
   # Pods for referral-ios
     pod 'SwiftMailgun'
+    pod 'Alamofire', '~> 4.2.0'
+    pod 'ObjectMapper'
 
 end

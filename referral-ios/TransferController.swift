@@ -87,7 +87,7 @@ class TransferController: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func isOnline() -> Bool {
+    @objc func isOnline() -> Bool {
         let reachability: Reachability = Reachability.init()!
         let networkStatus:Int = reachability.currentReachabilityStatus.hashValue
         return networkStatus != 0

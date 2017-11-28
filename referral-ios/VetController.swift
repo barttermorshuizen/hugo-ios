@@ -21,7 +21,7 @@ class VetController: UIViewController, UITextFieldDelegate {
     var referral : Referral?
     
     
-    var pickerData: [String] = [String]()
+    @objc var pickerData: [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,7 @@ class VetController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
+    @objc func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
         if (editText.text!.isEmpty){
             // set label text to accent color
             label.textColor = UIColor.init(red: 241/255, green: 90/255, blue: 49/255, alpha: 1)
@@ -80,7 +80,7 @@ class VetController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func colorLabelsWhenEmpty(){
+    @objc func colorLabelsWhenEmpty(){
         colorLabelWhenEmpty(lblVetPractice,mEditTextVetPractice);
         colorLabelWhenEmpty(lblVetEmail,mEditTextVetEmail);
     }
@@ -101,7 +101,7 @@ class VetController: UIViewController, UITextFieldDelegate {
             _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func modelToView(){
+    @objc func modelToView(){
         // copies the model in the view
         mEditTextName.text = referral!.getName()
         mEditTextVetPractice.text = referral!.getVetPractice()
@@ -110,7 +110,7 @@ class VetController: UIViewController, UITextFieldDelegate {
         colorLabelsWhenEmpty()
     }
     
-    func viewToModel() {
+    @objc func viewToModel() {
         // store the vet, place and name preferences to the model.
         referral!.setName(name: mEditTextName.text)
         referral!.setVetPractice(vetPractice: mEditTextVetPractice.text)

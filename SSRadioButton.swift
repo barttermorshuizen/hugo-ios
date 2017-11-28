@@ -76,7 +76,7 @@ class SSRadioButton: UIButton {
     /**
         Toggles selected state of the button.
     */
-    func toggleButon() {
+    @objc func toggleButon() {
         if self.isSelected {
             fillCircleLayer.fillColor = circleColor.cgColor
         } else {

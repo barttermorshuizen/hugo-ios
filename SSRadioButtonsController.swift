@@ -23,11 +23,11 @@ class SSRadioButtonsController : NSObject
 {
     fileprivate var buttonsArray = [UIButton]()
     fileprivate weak var currentSelectedButton:UIButton? = nil
-    weak var delegate : SSRadioButtonControllerDelegate? = nil
+    @objc weak var delegate : SSRadioButtonControllerDelegate? = nil
     /**
         Set whether a selected radio button can be deselected or not. Default value is false.
     */
-    var shouldLetDeSelect = false
+    @objc var shouldLetDeSelect = false
     /**
         Variadic parameter init that accepts UIButtons.
 
@@ -45,7 +45,7 @@ class SSRadioButtonsController : NSObject
 
         - parameter button: Add the button to controller.
     */
-    func addButton(_ aButton: UIButton) {
+    @objc func addButton(_ aButton: UIButton) {
         buttonsArray.append(aButton)
         aButton.addTarget(self, action: #selector(SSRadioButtonsController.pressed(_:)), for: UIControlEvents.touchUpInside)
     }
@@ -54,7 +54,7 @@ class SSRadioButtonsController : NSObject
 
         - parameter button: Button to be removed from controller.
     */
-    func removeButton(_ aButton: UIButton) {
+    @objc func removeButton(_ aButton: UIButton) {
         var iteratingButton: UIButton? = nil
         if(buttonsArray.contains(aButton))
         {
@@ -74,14 +74,14 @@ class SSRadioButtonsController : NSObject
         
         - parameter buttonArray: Array of buttons
     */
-    func setButtonsArray(_ aButtonsArray: [UIButton]) {
+    @objc func setButtonsArray(_ aButtonsArray: [UIButton]) {
         for aButton in aButtonsArray {
             aButton.addTarget(self, action: #selector(SSRadioButtonsController.pressed(_:)), for: UIControlEvents.touchUpInside)
         }
         buttonsArray = aButtonsArray
     }
 
-    func pressed(_ sender: UIButton) {
+    @objc func pressed(_ sender: UIButton) {
         if(sender.isSelected) {
             if shouldLetDeSelect {
                 sender.isSelected = false
@@ -103,7 +103,7 @@ class SSRadioButtonsController : NSObject
     
         - returns: Currenlty selected button.
     */
-    func selectedButton() -> UIButton? {
+    @objc func selectedButton() -> UIButton? {
         return currentSelectedButton
     }
 }

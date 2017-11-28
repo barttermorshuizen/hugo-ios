@@ -64,7 +64,7 @@ class OwnerController : UIViewController, UITextFieldDelegate {
         colorLabelsWhenEmpty()
     }
     
-    func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
+    @objc func colorLabelWhenEmpty(_ label:UILabel, _ editText:UITextField){
         if (editText.text!.isEmpty){
             // set label text to accent color
             label.textColor = UIColor.init(red: 241/255, green: 90/255, blue: 49/255, alpha: 1)
@@ -75,7 +75,7 @@ class OwnerController : UIViewController, UITextFieldDelegate {
         }
     }
     
-    func colorLabelsWhenEmpty(){
+    @objc func colorLabelsWhenEmpty(){
         colorLabelWhenEmpty(lblOwnerName,mEditTextOwnerName);
         // when either email or tel is filled, both can be light gray. If both empty, both accent color
         if (!mEditTextOwnerEmail.text!.isEmpty || !mEditTextOwnerTel.text!.isEmpty){
@@ -103,7 +103,7 @@ class OwnerController : UIViewController, UITextFieldDelegate {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func modelToView(){
+    @objc func modelToView(){
         // copies the model in the view
         //mEditTextName.text = referral!.getName();
         mEditTextOwnerName.text = referral!.getOwnerName()
@@ -112,7 +112,7 @@ class OwnerController : UIViewController, UITextFieldDelegate {
         colorLabelsWhenEmpty()
     }
     
-    func viewToModel() {
+    @objc func viewToModel() {
         referral!.setOwnerName(ownerName: mEditTextOwnerName.text)
         referral!.setOwnerEmail(ownerEmail: mEditTextOwnerEmail.text)
         referral!.setOwnerTel(ownerTel: mEditTextOwnerTel.text)
