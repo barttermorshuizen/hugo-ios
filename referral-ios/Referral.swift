@@ -22,7 +22,8 @@ class Referral {
     var mOwnerName : String? // name of the owner
     var mOwnerTel : String? // telephone number of the owner
     var mOwnerEmail : String?// email of the owner
-    var mReason : String?
+    var mReason : String? // referral reason
+    var mIsRecordedReason : Bool // indicates (true) if a reason was recorded
     var mContactByEmail : Bool
     
     func getName() -> String? {
@@ -138,6 +139,14 @@ class Referral {
         mContactByEmail = contactByEmail
     }
     
+    func getIsRecordedReason() -> Bool {
+        return mIsRecordedReason
+    }
+    
+    func setIsRecordedReason( isRecordedReason: Bool) {
+        mIsRecordedReason = isRecordedReason
+    }
+    
     init() {
         let defaults = UserDefaults.standard
         mName = defaults.string(forKey: "mName")
@@ -153,6 +162,13 @@ class Referral {
         mOwnerTel = defaults.string(forKey: "mOwnerTel")
         mOwnerEmail = defaults.string(forKey: "mOwnerEmail")
         mReason = defaults.string(forKey: "mReason")
+        let isRecordedReason = defaults.object(forKey: "mIsRecordedReason")
+        if (isRecordedReason != nil) {
+            mIsRecordedReason = isRecordedReason as! Bool
+        }
+        else {
+            mIsRecordedReason = false // defaults to false
+        }
         let contactByEmail = defaults.object(forKey: "mContactByEmail")
         if (contactByEmail != nil) {
             mContactByEmail = contactByEmail as! Bool
@@ -177,10 +193,11 @@ class Referral {
             let ownertel = json["ownertel"] as? String,
             let owneremail = json["owneremail"] as? String,
             let reason = json["reason"] as? String,
+            let isrecordedreason = json["isrecordedreason"] as? Bool,
             let contactbyemail = json["contactbyemail"] as? Bool
-        else {
-            return nil
-        }
+            else {
+                return nil
+            }
         
         mName = name
         mVetPractice = vetpractice
@@ -195,6 +212,7 @@ class Referral {
         mOwnerTel = ownertel
         mOwnerEmail = owneremail
         mReason = reason
+        mIsRecordedReason = isrecordedreason
         mContactByEmail = contactbyemail
         
     }
@@ -214,6 +232,7 @@ class Referral {
         json.setValue(mOwnerTel, forKey: "ownertel")
         json.setValue(mOwnerEmail, forKey: "owneremail")
         json.setValue(mReason, forKey: "reason")
+        json.setValue(mIsRecordedReason, forKey: "isrecordedreason")
         json.setValue(mContactByEmail, forKey: "contactbyemail")
         return json
     }
@@ -234,6 +253,7 @@ class Referral {
         defaults.setValue(mOwnerTel, forKey: "mOwnerTel")
         defaults.setValue(mOwnerEmail, forKey: "mOwnerEmail")
         defaults.setValue(mReason, forKey: "mReason")
+        defaults.setValue(mIsRecordedReason, forKey: "mIsRecordedReason")
         defaults.setValue(mContactByEmail, forKey: "mContactByEmail")
         
         defaults.synchronize()
@@ -243,6 +263,7 @@ class Referral {
         clearPatient()
         clearOwner()
         mReason=""
+        mIsRecordedReason=false
         mContactByEmail=true
     }
     
@@ -267,6 +288,12 @@ class Referral {
         mName=""
     }
     
+    func clearReason(){
+        mReason=""
+        mIsRecordedReason=false
+    }
+    
+    
     func validateComplete() -> String {
     // vet data
     if (mVetPractice != nil && mVetPractice!.isEmpty){
@@ -278,8 +305,8 @@ class Referral {
     }
         
     // reason is empty
-    if (mReason != nil && mReason!.isEmpty){
-        return "Reden verwijzing is niet ingevuld"
+    if ((mReason != nil && mReason!.isEmpty) && !mIsRecordedReason){
+        return "Reden verwijzing is niet ingevuld / niet opgenomen"
     }
         
     // patient data
@@ -418,6 +445,7 @@ class Referral {
         for item in lines {
             result = result + "\(item)\n"
         }
+        
         return result;
     }
 }

@@ -8,7 +8,7 @@
 
 
 import UIKit
-import SwiftMailgun
+import MailgunSwift
 
 
 class TransferController: UIViewController {
@@ -50,23 +50,38 @@ class TransferController: UIViewController {
             progressBar.setProgress(0.5, animated: true)
             // send mail
             
-            let mailgun = MailgunAPI(apiKey: apiKey, clientDomain: clientDomain)
+            let mailgun = Mailgun(apiKey: apiKey, domain: clientDomain)
             
-            
-            let emailFrom = (referral?.getVetEmail())!
-            
-            let emailSubject = "Verwijzing ten behoeve van " + (referral?.getOwnerName())!
-            let emailBody = referral?.toMessage()
-            
-            mailgun.sendEmail(to: emailHugo, from: emailFrom , subject: emailSubject, bodyHTML: emailBody!) { mailgunResult in
+            let message = MailgunMessage(from:(referral?.getVetEmail())!,
+                                         to:emailHugo,
+                                         message:"Verwijzing ten behoeve van " + (referral?.getOwnerName())!,
+                                         body:"")
+            message.html = referral?.toMessage()
+
+            if (referral?.getIsRecordedReason())!{
+                let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
                 
-                if mailgunResult.success{
+                do {
+                    let d = try Data.init(contentsOf: audioFilename)
+                    message.add(attachment: d, named: "recording.m4a", type: "audio/m4a")
+                }
+                catch {
+                    debugPrint("Error attaching recording",error)
+                }
+            }
+            
+            mailgun.send(message: message) { result in
+                switch result {
+                case .success(let messageId):do {
+                    debugPrint("Succesfull sending: ",messageId)
                     self.progressText.text="De verwijzing is verstuurd. \nHugo neemt snel contact op met de eigenaar voor een afspraak. \n\nBedankt voor de verwijzing! \n\nHugo"
                     self.mailSuccess = true
-                }
-                else {
-                    self.progressText.text="De verwijzing is niet verstuurd naar Hugo wegens een technisch probleem. \nNeem telefonisch contact op met Hugo om de verwijzing door te geven.\n\nHugo"
+                    }
+                case .failure (let error): do {
+                    debugPrint("Error sending: ",error);
+                    self.progressText.text="De verwijzing is niet verstuurd naar Hugo wegens een technisch probleem:" + error.localizedDescription + "\nNeem telefonisch contact op met Hugo om de verwijzing door te geven.\n\nHugo";
                     self.mailSuccess = false
+                    }
                 }
                 self.progressBar.setProgress(1.0, animated: true)
             }
@@ -91,5 +106,11 @@ class TransferController: UIViewController {
         let reachability: Reachability = Reachability.init()!
         let networkStatus:Int = reachability.currentReachabilityStatus.hashValue
         return networkStatus != 0
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
 }

@@ -6,7 +6,8 @@ target 'referral-ios' do
   use_frameworks!
 
   # Pods for referral-ios
-    pod 'SwiftMailgun'
+  #pod 'SwiftMailgun'
+    pod 'MailgunSwift', :git => 'https://github.com/bre7/mailgun-swift.git', :branch => 'master'
     pod 'Alamofire', '~> 4.2.0'
     pod 'ObjectMapper'
 
